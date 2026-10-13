@@ -3,7 +3,7 @@ name: Java CI/CD Pipeline to Docker Hub
 on:
   push:
     branches: [ "main" ]
-    
+
 permissions:
   contents: write
 
@@ -31,12 +31,10 @@ jobs:
         username: balu9963
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Build and Push Docker Image
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        push: true
-        tags: balu9963/spring-app:${{ github.sha }}
+    - name: Build and Push Docker Image using standard docker commands
+      run: |
+        docker build -t balu9963/spring-app:${{ github.sha }} .
+        docker push balu9963/spring-app:${{ github.sha }}
 
     - name: Update Kubernetes Deployment Image
       run: |

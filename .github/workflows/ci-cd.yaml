@@ -1,12 +1,12 @@
-name: Java CI/CD to Kubernetes
+name: Java CI/CD Pipeline to Docker Hub
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  build-and-deploy:
-    runs-on: self-hosted
+  build-and-push:
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -18,10 +18,23 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Build Docker Image
+    - name: Build with Maven
       run: |
-        docker build -t spring-app:latest .
+        mvn clean package -DskipTests
 
-    - name: Apply Kubernetes Manifests
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: balu9963
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Build and Push Docker Image
+      uses: docker/build-push-action@v4
+      with:
+        context: .
+        push: true
+        tags: balu9963/spring-app:${{ github.sha }}
+
+    - name: Update Kubernetes Deployment Image
       run: |
-        kubectl apply -f k8s/
+        sed -i 's|image: balu9963/spring-app:.*|image: balu9963/spring-app:${{ github.sha }}|g' k8s/deployment.yaml

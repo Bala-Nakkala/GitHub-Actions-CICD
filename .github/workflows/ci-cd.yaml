@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Set up JDK 17
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v5
       with:
         java-version: '17'
         distribution: 'temurin'
@@ -26,13 +26,13 @@ jobs:
         mvn clean package -DskipTests
 
     - name: Log in to Docker Hub
-      uses: docker/login-action@v2
+      uses: docker/login-action@v3
       with:
         username: balu9963
         password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Build and Push Docker Image
-      uses: docker/build-push-action@v4
+      uses: docker/build-push-action@v5
       with:
         context: .
         push: true
@@ -43,8 +43,11 @@ jobs:
         sed -i 's|image: balu9963/spring-app:.*|image: balu9963/spring-app:${{ github.sha }}|g' k8s/deployment.yaml
 
     - name: Commit and Push Image Tag Changes to GitHub
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
         git add k8s/deployment.yaml
-        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update k8s deployment image tag to ${{ github.sha }}" && git push)
+        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update k8s deployment image tag to ${{ github.sha }}" && git push origin main)

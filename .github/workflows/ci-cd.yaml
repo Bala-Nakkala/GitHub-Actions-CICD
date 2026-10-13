@@ -3,8 +3,7 @@ name: Java CI/CD Pipeline to Docker Hub
 on:
   push:
     branches: [ "main" ]
-
-# 1. GitHub Actions కి గిట్‌హబ్‌లో మార్పులు పుష్ చేయడానికి పర్మిషన్ ఇవ్వడం
+    
 permissions:
   contents: write
 
@@ -47,7 +46,5 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
-        git status
         git add k8s/deployment.yaml
-        git commit -m "chore: update k8s deployment image tag to ${{ github.sha }}"
-        git push
+        git diff --quiet && git diff --staged --quiet || (git commit -m "chore: update k8s deployment image tag to ${{ github.sha }}" && git push)

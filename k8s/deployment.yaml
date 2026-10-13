@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-app-deployment
-  namespace: spring-boot   # ఇక్కడ నేమ్‌స్పేస్ ఇవ్వండి
+  namespace: spring-boot  
 spec:
   replicas: 1
   selector:

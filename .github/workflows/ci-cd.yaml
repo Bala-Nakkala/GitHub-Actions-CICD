@@ -3,7 +3,7 @@ name: Java CI/CD Pipeline to Docker Hub
 on:
   push:
     branches: [ "main" ]
-
+    
 permissions:
   contents: write
 

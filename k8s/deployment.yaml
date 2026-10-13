@@ -2,8 +2,9 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-app-deployment
+  namespace: spring-boot   # ఇక్కడ నేమ్‌స్పేస్ ఇవ్వండి
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: spring-app
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
       - name: spring-app
-        image: balu9963/spring-app:482cc3ef4fd455653c93c69ff66b81c06d3e1e89
+        image: balu9963/spring-app:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

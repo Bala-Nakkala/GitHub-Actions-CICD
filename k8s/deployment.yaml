@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: spring-app-deployment
-  namespace: spring-boot  
+  namespace: spring-boot
 spec:
   replicas: 1
   selector:
@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: spring-app
-        image: balu9963/spring-app:687d1f0797d439625ddbf0803ec7d203c4d2aa7d
+        image: balu9963/spring-app:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

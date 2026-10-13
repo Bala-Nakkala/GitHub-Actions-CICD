@@ -4,13 +4,12 @@ on:
   push:
     branches: [ "main" ]
 
-# గిట్‌హబ్‌లో డిప్లాయ్‌మెంట్ ఫైల్‌ని ఆటోమేటిక్‌గా అప్‌డేట్ చేసి పుష్ చేయడానికి పర్మిషన్
 permissions:
   contents: write
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
     - name: Checkout code

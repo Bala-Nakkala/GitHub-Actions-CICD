@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>DevOps Dashboard</title>
+=======
+    <title>GitHub Actions CI/CD Dashboard</title>
+>>>>>>> 6d7514a (modify UI)
     <style>
         * {
             margin: 0;
@@ -12,13 +16,18 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
+<<<<<<< HEAD
             background-color: #0d0d0d;
+=======
+            background-color: #0b0f19;
+>>>>>>> 6d7514a (modify UI)
             color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
+<<<<<<< HEAD
         /* Top Orange Header Banner */
         .header-banner {
             width: 100%;
@@ -36,12 +45,37 @@
         .header-banner p {
             font-size: 0.95rem;
             color: #ffe6e6;
+=======
+        /* Top Header Banner with Gradient */
+        .header-banner {
+            width: 100%;
+            background: linear-gradient(135deg, #1f293d 0%, #111827 100%);
+            border-bottom: 2px solid #2563eb;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
+        }
+        .header-banner h1 {
+            font-size: 2.5rem;
+            color: #60a5fa;
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        .header-banner p {
+            font-size: 1.05rem;
+            color: #9ca3af;
+>>>>>>> 6d7514a (modify UI)
             letter-spacing: 0.5px;
         }
 
         /* Main Content Section */
         .main-container {
             text-align: center;
+<<<<<<< HEAD
             max-width: 900px;
             padding: 40px 20px;
         }
@@ -56,17 +90,39 @@
             line-height: 1.5;
             margin-bottom: 40px;
             padding: 0 10px;
+=======
+            max-width: 950px;
+            padding: 50px 20px;
+        }
+        .main-container h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #f3f4f6;
+        }
+        .main-container p {
+            font-size: 1.15rem;
+            color: #9ca3af;
+            line-height: 1.6;
+            margin-bottom: 45px;
+            padding: 0 15px;
+>>>>>>> 6d7514a (modify UI)
         }
 
         /* Status Cards Container */
         .cards-wrapper {
             display: flex;
             justify-content: center;
+<<<<<<< HEAD
             gap: 20px;
+=======
+            gap: 25px;
+>>>>>>> 6d7514a (modify UI)
             flex-wrap: wrap;
             margin-bottom: 40px;
         }
         .status-card {
+<<<<<<< HEAD
             background-color: #161616;
             border: 1px solid #222;
             border-radius: 12px;
@@ -74,18 +130,34 @@
             width: 220px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             transition: transform 0.2s ease;
+=======
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            padding: 30px 40px;
+            width: 250px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+>>>>>>> 6d7514a (modify UI)
             position: relative;
             overflow: hidden;
         }
         .status-card:hover {
+<<<<<<< HEAD
             transform: translateY(-5px);
         }
         /* Green Glow Border effect matching the screenshot */
+=======
+            transform: translateY(-6px);
+            border-color: #3b82f6;
+        }
+>>>>>>> 6d7514a (modify UI)
         .status-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
+<<<<<<< HEAD
             width: 4px;
             height: 100%;
             background-color: #00ff66;
@@ -114,6 +186,52 @@
             font-weight: 600;
             color: #cccccc;
             margin-top: 20px;
+=======
+            width: 5px;
+            height: 100%;
+            background-color: #10b981;
+            box-shadow: 0 0 12px #10b981;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #e5e7eb;
+        }
+        .card-status {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #10b981;
+            letter-spacing: 0.8px;
+        }
+
+        /* Tech Stack Badges Footer */
+        .tech-section {
+            width: 100%;
+            max-width: 950px;
+            padding: 0 20px 40px 20px;
+        }
+        .tech-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #93c5fd;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        .tech-badges {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .badge {
+            background-color: #1f2937;
+            color: #d1d5db;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid #374151;
+>>>>>>> 6d7514a (modify UI)
         }
     </style>
 </head>
@@ -121,18 +239,29 @@
 
     <!-- Top Banner -->
     <div class="header-banner">
+<<<<<<< HEAD
         <h1>🚀 DevOps CI/CD + GitOps Dashboard</h1>
         <p>Enterprise Deployment Platform</p>
+=======
+        <h1>⚙️ GitHub Actions CI/CD</h1>
+        <p>Automated Enterprise Pipeline & Deployment Dashboard</p>
+>>>>>>> 6d7514a (modify UI)
     </div>
 
     <!-- Main Content -->
     <div class="main-container">
+<<<<<<< HEAD
         <h2>Welcome to DevOps</h2>
         <p>This project demonstrates a complete Enterprise CI/CD + GitOps workflow using GitHub, Jenkins, Maven, Kaniko, Docker Hub, Helm, Argo CD and Kubernetes.</p>
+=======
+        <h2>Welcome to DevOps Dashboard</h2>
+        <p>This project demonstrates a complete enterprise CI/CD + GitHub workflow using GitHub Actions, Docker, and Kubernetes.</p>
+>>>>>>> 6d7514a (modify UI)
 
         <!-- Status Cards -->
         <div class="cards-wrapper">
             <div class="status-card">
+<<<<<<< HEAD
                 <div class="card-title">✓ Build</div>
                 <div class="card-status">SUCCESS</div>
             </div>
@@ -143,11 +272,37 @@
             <div class="status-card">
                 <div class="card-title">🚀 GitOps</div>
                 <div class="card-status">Synced</div>
+=======
+                <div class="card-title">✨ CI/CD Pipeline</div>
+                <div class="card-status">SUCCESS</div>
+            </div>
+            <div class="status-card">
+                <div class="card-title">☸️ Kubernetes</div>
+                <div class="card-status">Healthy</div>
+            </div>
+            <div class="status-card">
+                <div class="card-title">🚀 Deployment</div>
+                <div class="card-status">Active</div>
+>>>>>>> 6d7514a (modify UI)
             </div>
         </div>
     </div>
 
+<<<<<<< HEAD
     <div class="tech-stack-title">Technology Stack</div>
+=======
+    <!-- Technology Stack Badges -->
+    <div class="tech-section">
+        <div class="tech-title">Integrated Technology Stack</div>
+        <div class="tech-badges">
+            <span class="badge">Spring Boot</span>
+            <span class="badge">Java 17</span>
+            <span class="badge">Docker</span>
+            <span class="badge">Kubernetes (Kind)</span>
+            <span class="badge">GitHub Actions</span>
+        </div>
+    </div>
+>>>>>>> 6d7514a (modify UI)
 
 </body>
 </html>

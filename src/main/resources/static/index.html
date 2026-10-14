@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Actions CI/CD & Self-Hosted Runner Dashboard</title>
+    <title>GitHub Actions CI/CD & Self-Hosted Dashboard</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #0d1117;
+            background-color: #0b0f19;
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -22,25 +22,21 @@
         /* Top Header Banner */
         .header-banner {
             width: 100%;
-            background: linear-gradient(135deg, #1f6feb 0%, #111d4a 100%);
-            border-bottom: 2px solid #388bfd;
-            padding: 30px 20px;
+            background: linear-gradient(135deg, #1d4ed8 0%, #0f172a 100%);
+            border-bottom: 2px solid #3b82f6;
+            padding: 35px 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(56, 139, 253, 0.2);
+            box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
         }
         .header-banner h1 {
-            font-size: 2.4rem;
+            font-size: 2.5rem;
             color: #ffffff;
             font-weight: 700;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            margin-bottom: 10px;
         }
         .header-banner p {
-            font-size: 1.05rem;
-            color: #c9d1d9;
+            font-size: 1.1rem;
+            color: #93c5fd;
             letter-spacing: 0.5px;
         }
 
@@ -51,16 +47,16 @@
             padding: 50px 20px;
         }
         .main-container h2 {
-            font-size: 2.3rem;
-            margin-bottom: 18px;
+            font-size: 2.4rem;
+            margin-bottom: 20px;
             font-weight: 600;
-            color: #f0f6fc;
+            color: #f3f4f6;
         }
         .main-container p {
-            font-size: 1.12rem;
-            color: #8b949e;
+            font-size: 1.15rem;
+            color: #9ca3af;
             line-height: 1.6;
-            margin-bottom: 40px;
+            margin-bottom: 45px;
             padding: 0 15px;
         }
 
@@ -68,46 +64,46 @@
         .cards-wrapper {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 25px;
             flex-wrap: wrap;
             margin-bottom: 40px;
         }
         .status-card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 25px 30px;
-            width: 260px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 14px;
+            padding: 30px 35px;
+            width: 270px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s ease, border-color 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         .status-card:hover {
-            transform: translateY(-5px);
-            border-color: #58a6ff;
+            transform: translateY(-6px);
+            border-color: #3b82f6;
         }
         .status-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
+            width: 5px;
             height: 100%;
-            background-color: #2ea043;
-            box-shadow: 0 0 10px #2ea043;
+            background-color: #10b981;
+            box-shadow: 0 0 12px #10b981;
         }
         .card-title {
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 600;
-            margin-bottom: 10px;
-            color: #c9d1d9;
+            margin-bottom: 12px;
+            color: #e5e7eb;
         }
         .card-status {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #2ea043;
-            letter-spacing: 0.5px;
+            color: #10b981;
+            letter-spacing: 0.8px;
         }
 
         /* Tech Stack Badges Section */
@@ -117,25 +113,25 @@
             padding: 0 20px 40px 20px;
         }
         .tech-title {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            color: #58a6ff;
+            color: #60a5fa;
             margin-bottom: 15px;
             text-align: left;
         }
         .tech-badges {
             display: flex;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
         }
         .badge {
-            background-color: #21262d;
-            color: #c9d1d9;
+            background-color: #1f2937;
+            color: #d1d5db;
             padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 500;
-            border: 1px solid #30363d;
+            border: 1px solid #374151;
         }
     </style>
 </head>
@@ -144,13 +140,13 @@
     <!-- Top Banner -->
     <div class="header-banner">
         <h1>⚙️ GitHub Actions CI/CD Dashboard</h1>
-        <p>Powered by GitHub Actions Self-Hosted Runner</p>
+        <p>Powered by Self-Hosted Runner & Enterprise Automation</p>
     </div>
 
     <!-- Main Content -->
     <div class="main-container">
         <h2>Welcome to DevOps</h2>
-        <p>This project demonstrates a complete enterprise CI/CD + GitHub workflow using GitHub Actions, Argo CD, Kubernetes, and Docker Hub.</p>
+        <p>This project demonstrates a complete Enterprise CI/CD + GitOps workflow using GitHub Actions, Docker Hub, Kubernetes, and Argo CD.</p>
 
         <!-- Status Cards -->
         <div class="cards-wrapper">
@@ -171,7 +167,7 @@
 
     <!-- Technology Stack Section -->
     <div class="tech-section">
-        <div class="tech-title">Enterprise Technology Stack</div>
+        <div class="tech-title">Integrated Technology Stack</div>
         <div class="tech-badges">
             <span class="badge">GitHub Actions</span>
             <span class="badge">Self-Hosted Runner</span>
@@ -183,4 +179,4 @@
     </div>
 
 </body>
-</html>
+</html>s

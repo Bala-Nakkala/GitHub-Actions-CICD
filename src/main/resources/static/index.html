@@ -92,7 +92,7 @@
         }
         .status-card.active {
             border-color: #3b82f6;
-            background: rgba(30, 58, 138, 0.3);
+            background: rgba(30, 58, 138, 0.4);
         }
         .card-title {
             font-size: 1.2rem;
@@ -106,16 +106,16 @@
             color: #34d399;
         }
 
-        /* Details Section (Dynamic Content Box) */
+        /* Details Section */
         .details-box {
-            background: rgba(15, 23, 42, 0.75);
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 16px;
             padding: 30px;
             text-align: left;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
             display: none;
             animation: fadeIn 0.4s ease-in-out;
         }
@@ -189,15 +189,15 @@
 
         <!-- Interactive Cards / Buttons -->
         <div class="cards-wrapper">
-            <div class="status-card" onclick="showDetails('github')">
+            <div class="status-card" onclick="showDetails('github', this)">
                 <div class="card-title">⚡ GitHub Actions</div>
                 <div class="card-status">Self-Hosted Active &rarr;</div>
             </div>
-            <div class="status-card" onclick="showDetails('kubernetes')">
+            <div class="status-card" onclick="showDetails('kubernetes', this)">
                 <div class="card-title">☸️ Kubernetes</div>
                 <div class="card-status">Cluster Healthy &rarr;</div>
             </div>
-            <div class="status-card" onclick="showDetails('gitops')">
+            <div class="status-card" onclick="showDetails('gitops', this)">
                 <div class="card-title">🚀 Argo CD & GitOps</div>
                 <div class="card-status">Synced &rarr;</div>
             </div>
@@ -249,7 +249,7 @@
     </div>
 
     <script>
-        function showDetails(type) {
+        function showDetails(type, element) {
             // Hide all details boxes
             document.querySelectorAll('.details-box').forEach(box => box.classList.remove('show'));
             // Remove active class from cards
@@ -258,13 +258,14 @@
             // Show selected box and activate card
             if (type === 'github') {
                 document.getElementById('github-details').classList.add('show');
-                event.currentTarget.classList.add('active');
             } else if (type === 'kubernetes') {
                 document.getElementById('kubernetes-details').classList.add('show');
-                event.currentTarget.classList.add('active');
             } else if (type === 'gitops') {
                 document.getElementById('gitops-details').classList.add('show');
-                event.currentTarget.classList.add('active');
+            }
+
+            if (element) {
+                element.classList.add('active');
             }
         }
     </script>

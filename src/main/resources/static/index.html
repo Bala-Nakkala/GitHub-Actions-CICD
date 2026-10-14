@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Actions CI/CD & Self-Hosted Dashboard</title>
+    <title>Enterprise DevOps Dashboard</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
         }
         body {
             background-color: #030712;
@@ -18,196 +18,224 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            background-image: radial-gradient(circle at 10% 20%, rgba(29, 78, 216, 0.15) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 40%);
         }
 
-        /* Top Header Banner with Glassmorphism */
+        /* Glassmorphism Header */
         .header-banner {
             width: 100%;
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
-            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
-            padding: 40px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px 20px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
         }
         .header-banner h1 {
-            font-size: 2.6rem;
+            font-size: 2.5rem;
             color: #ffffff;
             font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: -0.5px;
+            margin-bottom: 8px;
         }
         .header-banner p {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #93c5fd;
-            font-weight: 400;
         }
 
         /* Main Container */
         .main-container {
             text-align: center;
-            max-width: 1000px;
-            padding: 60px 20px 30px 20px;
+            max-width: 1100px;
+            padding: 40px 20px;
+            width: 100%;
         }
         .main-container h2 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            font-weight: 700;
-            background: linear-gradient(to right, #60a5fa, #38bdf8);
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            background: linear-gradient(to right, #60a5fa, #34d399);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         .main-container p {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #9ca3af;
-            line-height: 1.6;
-            margin-bottom: 50px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: 35px;
         }
 
-        /* Status Cards Grid */
+        /* Interactive Cards Grid */
         .cards-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            width: 100%;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
         .status-card {
-            background: rgba(17, 24, 39, 0.7);
+            background: rgba(17, 24, 39, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(8px);
+            padding: 25px;
+            cursor: pointer;
             transition: all 0.3s ease;
+            text-align: left;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             position: relative;
             overflow: hidden;
-            text-align: left;
         }
         .status-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             border-color: rgba(59, 130, 246, 0.5);
-            box-shadow: 0 12px 40px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 12px 35px rgba(37, 99, 235, 0.25);
         }
-        .card-header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
+        .status-card.active {
+            border-color: #3b82f6;
+            background: rgba(30, 58, 138, 0.3);
         }
         .card-title {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: #e5e7eb;
-        }
-        /* Live Pulsing Dot Animation */
-        .pulse-dot {
-            width: 10px;
-            height: 10px;
-            background-color: #10b981;
-            border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-            }
-            70% {
-                transform: scale(1);
-                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
-            }
-            100% {
-                transform: scale(0.95);
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-            }
+            margin-bottom: 8px;
         }
         .card-status {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: #10b981;
-            letter-spacing: 0.5px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #34d399;
         }
 
-        /* Tech Stack Section */
+        /* Details Section (Dynamic Content Box) */
+        .details-box {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: left;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+        .details-box.show {
+            display: block;
+        }
+        .details-box h3 {
+            font-size: 1.5rem;
+            color: #60a5fa;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .details-box ul {
+            padding-left: 20px;
+            color: #d1d5db;
+            line-height: 1.8;
+        }
+        .details-box li {
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tech Stack */
         .tech-section {
             width: 100%;
-            max-width: 1000px;
-            padding: 0 20px 50px 20px;
+            max-width: 1100px;
+            padding: 0 20px 40px 20px;
             text-align: left;
         }
         .tech-title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: #60a5fa;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         .tech-badges {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .badge {
-            background-color: rgba(31, 41, 55, 0.8);
-            color: #e5e7eb;
-            padding: 10px 18px;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            font-weight: 500;
+            background: rgba(31, 41, 55, 0.7);
+            backdrop-filter: blur(8px);
+            color: #d1d5db;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: background 0.2s;
-        }
-        .badge:hover {
-            background-color: rgba(55, 65, 81, 1);
-            color: #ffffff;
         }
     </style>
 </head>
 <body>
 
-    <!-- Top Banner -->
+    <!-- Header Banner -->
     <div class="header-banner">
-        <h1>⚙️ GitHub Actions CI/CD Dashboard</h1>
-        <p>Enterprise Local Deployment via Docker Desktop & Kind</p>
+        <h1>⚙️ Enterprise DevOps Dashboard</h1>
+        <p>CI/CD Automation & GitOps Management Platform</p>
     </div>
 
-    <!-- Main Content -->
+    <!-- Main Container -->
     <div class="main-container">
         <h2>Welcome to DevOps</h2>
-        <p>이 project demonstrates a complete enterprise CI/CD + GitHub workflow using GitHub Actions, Docker Hub, Kubernetes, and Argo CD.</p>
+        <p>Click on any component below to view configuration summaries, prerequisites, and system components.</p>
 
-        <!-- Status Cards -->
+        <!-- Interactive Cards / Buttons -->
         <div class="cards-wrapper">
-            <div class="status-card">
-                <div class="card-header-flex">
-                    <span class="card-title">⚡ GitHub Actions</span>
-                    <div class="pulse-dot"></div>
-                </div>
-                <div class="card-status">Self-Hosted Active</div>
+            <div class="status-card" onclick="showDetails('github')">
+                <div class="card-title">⚡ GitHub Actions</div>
+                <div class="card-status">Self-Hosted Active &rarr;</div>
             </div>
-            <div class="status-card">
-                <div class="card-header-flex">
-                    <span class="card-title">☸️ Kubernetes</span>
-                    <div class="pulse-dot"></div>
-                </div>
-                <div class="card-status">Healthy Cluster</div>
+            <div class="status-card" onclick="showDetails('kubernetes')">
+                <div class="card-title">☸️ Kubernetes</div>
+                <div class="card-status">Cluster Healthy &rarr;</div>
             </div>
-            <div class="status-card">
-                <div class="card-header-flex">
-                    <span class="card-title">🚀 Argo CD & GitOps</span>
-                    <div class="pulse-dot"></div>
-                </div>
-                <div class="card-status">Synced</div>
+            <div class="status-card" onclick="showDetails('gitops')">
+                <div class="card-title">🚀 Argo CD & GitOps</div>
+                <div class="card-status">Synced &rarr;</div>
             </div>
+        </div>
+
+        <!-- Dynamic Content Box -->
+        <div id="github-details" class="details-box">
+            <h3>⚡ GitHub Actions Self-Hosted Runner Configuration</h3>
+            <ul>
+                <li><strong>Runner Directory Setup:</strong> Create a dedicated directory (e.g., `actions-runner`) in your local machine.</li>
+                <li><strong>Download Package:</strong> Fetch the official runner package from GitHub releases using `curl` or browser.</li>
+                <li><strong>Configure Token:</strong> Run `./config.sh --url &lt;repository-url&gt; --token &lt;secret-token&gt;` provided by GitHub repository settings.</li>
+                <li><strong>Service & Execution:</strong> Start the runner using `./run.sh` or configure it as a background system service for continuous listening.</li>
+            </ul>
+        </div>
+
+        <div id="kubernetes-details" class="details-box">
+            <h3>☸️ Kubernetes & Local Components Required</h3>
+            <ul>
+                <li><strong>Container Runtime / Docker Desktop:</strong> Required for building container images and running local container workloads.</li>
+                <li><strong>Kind (Kubernetes in Docker):</strong> To spin up local multi-node or single-node Kubernetes clusters effortlessly.</li>
+                <li><strong>Kubectl CLI:</strong> Essential command-line tool for communicating with the cluster API server and managing pods/deployments.</li>
+                <li><strong>Namespaces & Manifests:</strong> Configured YAML files for Deployment, Service, and resource constraints (`spring-boot` namespace).</li>
+            </ul>
+        </div>
+
+        <div id="gitops-details" class="details-box">
+            <h3>🚀 Argo CD & GitOps Prerequisites</h3>
+            <ul>
+                <li><strong>Git Repository Structure:</strong> Centralized source code and Kubernetes manifests repository for declarative state tracking.</li>
+                <li><strong>Argo CD Controller:</strong> Installed inside the Kubernetes cluster to continuously monitor repository changes.</li>
+                <li><strong>Cluster Access & Credentials:</strong> Configured target cluster context so Argo CD can sync the desired state automatically.</li>
+                <li><strong>Automated Sync Policies:</strong> Optional setup for auto-syncing changes whenever a new image tag is pushed to Docker Hub.</li>
+            </ul>
         </div>
     </div>
 
-    <!-- Technology Stack Section -->
+    <!-- Technology Stack -->
     <div class="tech-section">
         <div class="tech-title">Integrated Technology Stack</div>
         <div class="tech-badges">
@@ -220,5 +248,25 @@
         </div>
     </div>
 
+    <script>
+        function showDetails(type) {
+            // Hide all details boxes
+            document.querySelectorAll('.details-box').forEach(box => box.classList.remove('show'));
+            // Remove active class from cards
+            document.querySelectorAll('.status-card').forEach(card => card.classList.remove('active'));
+
+            // Show selected box and activate card
+            if (type === 'github') {
+                document.getElementById('github-details').classList.add('show');
+                event.currentTarget.classList.add('active');
+            } else if (type === 'kubernetes') {
+                document.getElementById('kubernetes-details').classList.add('show');
+                event.currentTarget.classList.add('active');
+            } else if (type === 'gitops') {
+                document.getElementById('gitops-details').classList.add('show');
+                event.currentTarget.classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>

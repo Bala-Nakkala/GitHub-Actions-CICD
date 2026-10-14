@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: spring-app
-        image: balu9963/spring-app:e0a4a9c9b186204a073e543976fe286fef105744
+        image: balu9963/spring-app:3b5c4e1051128b5dfda6d238c470c02e0bf9b341
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080

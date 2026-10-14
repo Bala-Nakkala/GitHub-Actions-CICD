@@ -185,52 +185,52 @@
     <!-- Main Container -->
     <div class="main-container">
         <h2>Welcome to DevOps</h2>
-        <p>Click on any component below to view configuration summaries, prerequisites, and system components.</p>
+        <p>Click on pipeline components below in order to view summaries, sync status, and deployment details.</p>
 
-        <!-- Interactive Cards / Buttons -->
+        <!-- Pipeline Workflow Cards (1. GitHub Actions -> 2. Argo CD & GitOps -> 3. Kubernetes) -->
         <div class="cards-wrapper">
             <div class="status-card" onclick="showDetails('github', this)">
                 <div class="card-title">⚡ GitHub Actions</div>
                 <div class="card-status">Self-Hosted Active &rarr;</div>
             </div>
-            <div class="status-card" onclick="showDetails('kubernetes', this)">
-                <div class="card-title">☸️ Kubernetes</div>
-                <div class="card-status">Cluster Healthy &rarr;</div>
-            </div>
             <div class="status-card" onclick="showDetails('gitops', this)">
                 <div class="card-title">🚀 Argo CD & GitOps</div>
                 <div class="card-status">Synced &rarr;</div>
             </div>
+            <div class="status-card" onclick="showDetails('kubernetes', this)">
+                <div class="card-title">☸️ Kubernetes</div>
+                <div class="card-status">Cluster Healthy &rarr;</div>
+            </div>
         </div>
 
-        <!-- Dynamic Content Box -->
+        <!-- Dynamic Content Boxes -->
         <div id="github-details" class="details-box">
-            <h3>⚡ GitHub Actions Self-Hosted Runner Configuration</h3>
+            <h3>⚡ Step 1: GitHub Actions Self-Hosted Runner Configuration</h3>
             <ul>
                 <li><strong>Runner Directory Setup:</strong> Create a dedicated directory (e.g., `actions-runner`) in your local machine.</li>
-                <li><strong>Download Package:</strong> Fetch the official runner package from GitHub releases using `curl` or browser.</li>
-                <li><strong>Configure Token:</strong> Run `./config.sh --url &lt;repository-url&gt; --token &lt;secret-token&gt;` provided by GitHub repository settings.</li>
-                <li><strong>Service & Execution:</strong> Start the runner using `./run.sh` or configure it as a background system service for continuous listening.</li>
-            </ul>
-        </div>
-
-        <div id="kubernetes-details" class="details-box">
-            <h3>☸️ Kubernetes & Local Components Required</h3>
-            <ul>
-                <li><strong>Container Runtime / Docker Desktop:</strong> Required for building container images and running local container workloads.</li>
-                <li><strong>Kind (Kubernetes in Docker):</strong> To spin up local multi-node or single-node Kubernetes clusters effortlessly.</li>
-                <li><strong>Kubectl CLI:</strong> Essential command-line tool for communicating with the cluster API server and managing pods/deployments.</li>
-                <li><strong>Namespaces & Manifests:</strong> Configured YAML files for Deployment, Service, and resource constraints (`spring-boot` namespace).</li>
+                <li><strong>Download Package:</strong> Fetch the official runner package from GitHub releases using `curl`.</li>
+                <li><strong>Configure Token:</strong> Run `./config.sh --url &lt;repository-url&gt; --token &lt;secret-token&gt;` to link runner.</li>
+                <li><strong>Build & Push:</strong> Compiles code, builds Docker images, and updates the manifests repository.</li>
             </ul>
         </div>
 
         <div id="gitops-details" class="details-box">
-            <h3>🚀 Argo CD & GitOps Prerequisites</h3>
+            <h3>🚀 Step 2: Argo CD & GitOps Prerequisites & Sync</h3>
             <ul>
-                <li><strong>Git Repository Structure:</strong> Centralized source code and Kubernetes manifests repository for declarative state tracking.</li>
-                <li><strong>Argo CD Controller:</strong> Installed inside the Kubernetes cluster to continuously monitor repository changes.</li>
-                <li><strong>Cluster Access & Credentials:</strong> Configured target cluster context so Argo CD can sync the desired state automatically.</li>
-                <li><strong>Automated Sync Policies:</strong> Optional setup for auto-syncing changes whenever a new image tag is pushed to Docker Hub.</li>
+                <li><strong>Manifests Repository:</strong> Centralized tracking of declarative Kubernetes manifests updated by CI.</li>
+                <li><strong>Argo CD Controller:</strong> Continuously monitors the repository for any image tag or configuration updates.</li>
+                <li><strong>Automatic Syncing:</strong> Detects changes made by GitHub Actions and initiates cluster state synchronization.</li>
+                <li><strong>Health Status Check:</strong> Ensures desired state matches the live cluster state seamlessly.</li>
+            </ul>
+        </div>
+
+        <div id="kubernetes-details" class="details-box">
+            <h3>☸️ Step 3: Kubernetes Deployment & Local Components</h3>
+            <ul>
+                <li><strong>Container Runtime / Docker Desktop:</strong> Executes container workloads locally with high performance.</li>
+                <li><strong>Kind (Kubernetes in Docker):</strong> Spins up local cluster environments for testing production setups.</li>
+                <li><strong>Namespaces & Resources:</strong> Manages pods and services securely inside the `spring-boot` namespace.</li>
+                <li><strong>Live Port Forwarding:</strong> Exposes application endpoints to verify dashboard accessibility.</li>
             </ul>
         </div>
     </div>
@@ -250,18 +250,15 @@
 
     <script>
         function showDetails(type, element) {
-            // Hide all details boxes
             document.querySelectorAll('.details-box').forEach(box => box.classList.remove('show'));
-            // Remove active class from cards
             document.querySelectorAll('.status-card').forEach(card => card.classList.remove('active'));
 
-            // Show selected box and activate card
             if (type === 'github') {
                 document.getElementById('github-details').classList.add('show');
-            } else if (type === 'kubernetes') {
-                document.getElementById('kubernetes-details').classList.add('show');
             } else if (type === 'gitops') {
                 document.getElementById('gitops-details').classList.add('show');
+            } else if (type === 'kubernetes') {
+                document.getElementById('kubernetes-details').classList.add('show');
             }
 
             if (element) {

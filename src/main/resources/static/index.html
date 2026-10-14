@@ -1,29 +1,153 @@
 <!DOCTYPE html>
-<html lang="tel">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to GitHub Actions</title>
+    <title>DevOps Dashboard</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background-color: #000000; /* బ్లాక్ బ్యాక్‌గ్రౌండ్ */
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #0d0d0d;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* Top Orange Header Banner */
+        .header-banner {
+            width: 100%;
+            background-color: #ff4500;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .header-banner h1 {
+            font-size: 2.2rem;
+            color: #ffffff;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .header-banner p {
+            font-size: 0.95rem;
+            color: #ffe6e6;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Content Section */
+        .main-container {
+            text-align: center;
+            max-width: 900px;
+            padding: 40px 20px;
+        }
+        .main-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .main-container p {
+            font-size: 1rem;
+            color: #b3b3b3;
+            line-height: 1.5;
+            margin-bottom: 40px;
+            padding: 0 10px;
+        }
+
+        /* Status Cards Container */
+        .cards-wrapper {
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
-        h1 {
-            color: #00a8ff; /* బ్లూ కలర్ టెక్స్ట్ */
-            font-size: 3rem;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(0, 168, 255, 0.5);
+        .status-card {
+            background-color: #161616;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 25px 35px;
+            width: 220px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .status-card:hover {
+            transform: translateY(-5px);
+        }
+        /* Green Glow Border effect matching the screenshot */
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: #00ff66;
+            box-shadow: 0 0 10px #00ff66;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+        .card-status {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #00ff66;
+            letter-spacing: 1px;
+        }
+
+        /* Footer / Technology Stack Section */
+        .tech-stack-title {
+            text-align: left;
+            width: 100%;
+            max-width: 900px;
+            padding-left: 20px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #cccccc;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Welcome to GitHub Actions</h1>
+
+    <!-- Top Banner -->
+    <div class="header-banner">
+        <h1>🚀 DevOps CI/CD + GitOps Dashboard</h1>
+        <p>Enterprise Deployment Platform</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <h2>Welcome to DevOps</h2>
+        <p>This project demonstrates a complete Enterprise CI/CD + GitOps workflow using GitHub, Jenkins, Maven, Kaniko, Docker Hub, Helm, Argo CD and Kubernetes.</p>
+
+        <!-- Status Cards -->
+        <div class="cards-wrapper">
+            <div class="status-card">
+                <div class="card-title">✓ Build</div>
+                <div class="card-status">SUCCESS</div>
+            </div>
+            <div class="status-card">
+                <div class="card-title">⚙️ Kubernetes</div>
+                <div class="card-status">Healthy</div>
+            </div>
+            <div class="status-card">
+                <div class="card-title">🚀 GitOps</div>
+                <div class="card-status">Synced</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tech-stack-title">Technology Stack</div>
+
 </body>
 </html>

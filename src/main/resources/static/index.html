@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Actions CI/CD Dashboard</title>
+    <title>GitHub Actions CI/CD & Self-Hosted Runner Dashboard</title>
     <style>
         * {
             margin: 0;
@@ -12,35 +12,35 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #0b0f19;
+            background-color: #0d1117;
             color: #ffffff;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
         }
-        /* Top Header Banner with Gradient */
+        /* Top Header Banner */
         .header-banner {
             width: 100%;
-            background: linear-gradient(135deg, #1f293d 0%, #111827 100%);
-            border-bottom: 2px solid #2563eb;
+            background: linear-gradient(135deg, #1f6feb 0%, #111d4a 100%);
+            border-bottom: 2px solid #388bfd;
             padding: 30px 20px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.2);
+            box-shadow: 0 4px 20px rgba(56, 139, 253, 0.2);
         }
         .header-banner h1 {
-            font-size: 2.5rem;
-            color: #60a5fa;
+            font-size: 2.4rem;
+            color: #ffffff;
             font-weight: 700;
             margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
         }
         .header-banner p {
             font-size: 1.05rem;
-            color: #9ca3af;
+            color: #c9d1d9;
             letter-spacing: 0.5px;
         }
 
@@ -51,16 +51,16 @@
             padding: 50px 20px;
         }
         .main-container h2 {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
+            font-size: 2.3rem;
+            margin-bottom: 18px;
             font-weight: 600;
-            color: #f3f4f6;
+            color: #f0f6fc;
         }
         .main-container p {
-            font-size: 1.15rem;
-            color: #9ca3af;
+            font-size: 1.12rem;
+            color: #8b949e;
             line-height: 1.6;
-            margin-bottom: 45px;
+            margin-bottom: 40px;
             padding: 0 15px;
         }
 
@@ -68,49 +68,49 @@
         .cards-wrapper {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: 20px;
             flex-wrap: wrap;
             margin-bottom: 40px;
         }
         .status-card {
-            background-color: #111827;
-            border: 1px solid #1f2937;
-            border-radius: 14px;
-            padding: 30px 40px;
-            width: 250px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 25px 30px;
+            width: 260px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
             transition: transform 0.3s ease, border-color 0.3s ease;
             position: relative;
             overflow: hidden;
         }
         .status-card:hover {
-            transform: translateY(-6px);
-            border-color: #3b82f6;
+            transform: translateY(-5px);
+            border-color: #58a6ff;
         }
         .status-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 5px;
+            width: 4px;
             height: 100%;
-            background-color: #10b981;
-            box-shadow: 0 0 12px #10b981;
+            background-color: #2ea043;
+            box-shadow: 0 0 10px #2ea043;
         }
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 12px;
-            color: #e5e7eb;
+            margin-bottom: 10px;
+            color: #c9d1d9;
         }
         .card-status {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            color: #10b981;
-            letter-spacing: 0.8px;
+            color: #2ea043;
+            letter-spacing: 0.5px;
         }
 
-        /* Tech Stack Badges Footer */
+        /* Tech Stack Badges Section */
         .tech-section {
             width: 100%;
             max-width: 950px;
@@ -119,23 +119,23 @@
         .tech-title {
             font-size: 1.2rem;
             font-weight: 600;
-            color: #93c5fd;
+            color: #58a6ff;
             margin-bottom: 15px;
             text-align: left;
         }
         .tech-badges {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         .badge {
-            background-color: #1f2937;
-            color: #d1d5db;
+            background-color: #21262d;
+            color: #c9d1d9;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
-            border: 1px solid #374151;
+            border: 1px solid #30363d;
         }
     </style>
 </head>
@@ -143,41 +143,42 @@
 
     <!-- Top Banner -->
     <div class="header-banner">
-        <h1>⚙️ GitHub Actions CI/CD</h1>
-        <p>Automated Enterprise Pipeline & Deployment Dashboard</p>
+        <h1>⚙️ GitHub Actions CI/CD Dashboard</h1>
+        <p>Powered by GitHub Actions Self-Hosted Runner</p>
     </div>
 
     <!-- Main Content -->
     <div class="main-container">
-        <h2>Welcome to DevOps Dashboard</h2>
-        <p>This project demonstrates a complete enterprise CI/CD + GitHub workflow using GitHub Actions, Docker, and Kubernetes.</p>
+        <h2>Welcome to DevOps</h2>
+        <p>This project demonstrates a complete enterprise CI/CD + GitHub workflow using GitHub Actions, Argo CD, Kubernetes, and Docker Hub.</p>
 
         <!-- Status Cards -->
         <div class="cards-wrapper">
             <div class="status-card">
-                <div class="card-title">✨ CI/CD Pipeline</div>
-                <div class="card-status">SUCCESS</div>
+                <div class="card-title">⚡ GitHub Actions</div>
+                <div class="card-status">Self-Hosted Active</div>
             </div>
             <div class="status-card">
                 <div class="card-title">☸️ Kubernetes</div>
                 <div class="card-status">Healthy</div>
             </div>
             <div class="status-card">
-                <div class="card-title">🚀 Deployment</div>
-                <div class="card-status">Active</div>
+                <div class="card-title">🚀 Argo CD & GitOps</div>
+                <div class="card-status">Synced</div>
             </div>
         </div>
     </div>
 
-    <!-- Technology Stack Badges -->
+    <!-- Technology Stack Section -->
     <div class="tech-section">
-        <div class="tech-title">Integrated Technology Stack</div>
+        <div class="tech-title">Enterprise Technology Stack</div>
         <div class="tech-badges">
-            <span class="badge">Spring Boot</span>
-            <span class="badge">Java 17</span>
-            <span class="badge">Docker</span>
-            <span class="badge">Kubernetes (Kind)</span>
             <span class="badge">GitHub Actions</span>
+            <span class="badge">Self-Hosted Runner</span>
+            <span class="badge">Docker Hub</span>
+            <span class="badge">Kubernetes</span>
+            <span class="badge">Argo CD</span>
+            <span class="badge">Spring Boot</span>
         </div>
     </div>
 

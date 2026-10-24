@@ -47,15 +47,9 @@ jobs:
         git config --global user.name "GitHub Actions Bot"
         git config --global user.email "actions@github.com"
         git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
-        
-        # 1. లోకల్ అన్‌స్టేజ్డ్ చేంజెస్ ని తాత్కాలికంగా దాచుకోవడం
         git stash
-        
-        # 2. రిమోట్ నుండి లేటెస్ట్ కోడ్ తెచ్చుకుని రీబేస్ చేయడం
         git fetch origin main
         git rebase origin/main
-        
-        # 3. దాచుకున్న చేంజెస్ ని మళ్లీ వెనక్కి తెచ్చుకోవడం
         git stash pop || true
         
         # 4. యాడ్ చేసి కమిట్ & పుష్ చేయడం
